@@ -46,10 +46,26 @@ async function deleteUsers(req, res) {
 }
 
 
+//controller to update user
+async function updateUsers(req,res){
+  const email = req.body.email;
+  const {name, age} = req.body; // Destructure name and age from request body
+
+  const updateFields = {};
+  if(name) updateFields.name = name; // Add name to updateFields if provided
+  if(age) updateFields.age = age; // Add age to updateFields if provided
+
+  try{
+    await User.findOneAndUpdate(
+      {email},
+      updateFields
+    )
+    res.status(200).json({message: 'User Updated Successfully'})
+  }
+  catch(err){
+    res.status(500).json({ error: 'Failed to update user' }); // Respond with an error
+  }
+}
 
 
-
-
-
-
-module.exports = {getUsers, addUsers, deleteUsers};
+module.exports = {getUsers, addUsers, deleteUsers, updateUsers};
