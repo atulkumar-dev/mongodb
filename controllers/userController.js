@@ -1,3 +1,4 @@
+
 const User = require('../models/userModel');
 
 
@@ -12,4 +13,26 @@ async function getUsers(req,res){
   }
 }
 
-module.exports = {getUsers};
+//controller to add users
+
+async function addUsers(req,res){
+  
+  const { name, email, age } = req.body;
+  const newUser = new User({
+    name,email,age
+  });
+
+  try {
+    const savedUser = await newUser.save();
+    console.log('User created:', savedUser);
+    res.status(201).json({message: 'User Added Successfully'}); // Respond with the created user
+  } catch (err) {
+    console.error('Error saving user:', err);
+    res.status(500).json({ error: 'Failed to create user' }); // Respond with an error
+  }
+}
+
+
+
+
+module.exports = {getUsers, addUsers};

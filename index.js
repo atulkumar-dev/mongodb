@@ -3,8 +3,10 @@ require('dotenv').config();
 const connectdb = require('./dbConnection');
 const userRoute = require('./routes/userRoute');
 
-
 const app = express();
+
+//middleware to parse body
+app.use(express.json());
 
 //using the user route
 app.use('/',userRoute);
