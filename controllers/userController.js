@@ -32,7 +32,24 @@ async function addUsers(req,res){
   }
 }
 
+//controller to delete users
+async function deleteUsers(req, res) {
+  const name = req.body.name;
+  try{
+    await User.deleteOne({ name:name });
+    return res.status(200).json({ message: 'User deleted successfully' });
+  }
+  catch(err){
+    console.error('Error deleting user:', err);
+    return res.status(500).json({ error: 'Failed to delete user' });
+  } 
+}
 
 
 
-module.exports = {getUsers, addUsers};
+
+
+
+
+
+module.exports = {getUsers, addUsers, deleteUsers};
