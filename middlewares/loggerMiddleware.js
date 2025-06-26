@@ -1,16 +1,8 @@
 
 const loggerMiddleware = (req, res, next)=>{
-const today = new Date();
-const yyyy = today.getFullYear();
-let mm = today.getMonth() + 1; // Months start at 0!
-let dd = today.getDate();
+const date = new Date();
 
-if (dd < 10) dd = '0' + dd;
-if (mm < 10) mm = '0' + mm;
-
-const formattedToday = dd + '/' + mm + '/' + yyyy;
-
-    console.log(`Date: ${today}, Method: ${req.method}, URL: ${req.url}}`);
+    console.log(`Date: ${date}, Method: ${req.method}, URL: ${req.url}}`);
     next();
 
 }
